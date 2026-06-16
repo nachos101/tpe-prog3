@@ -6,7 +6,7 @@ public class Paquete {
 	private boolean contieneAlimentos;
 	private float pesoPaquete;
 	private int nivelUrgencia;
-	public Paquete(int id, String codigo, boolean contieneAlimentos, float pesoPaquete, int nivelUrgencia) {
+	public Paquete(int id, String codigo, float pesoPaquete, boolean contieneAlimentos , int nivelUrgencia) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -50,5 +50,13 @@ public class Paquete {
 	public void setNivelUrgencia(int nivelUrgencia) {
 		this.nivelUrgencia = nivelUrgencia;
 	}
+
+	@Override
+	public String toString() {
+		return "Paquete [id=" + id + ", codigo=" + codigo + ", contieneAlimentos=" + contieneAlimentos
+				+ ", pesoPaquete=" + pesoPaquete + ", nivelUrgencia=" + nivelUrgencia + "]";
+	}
+	
+	
 	
 }

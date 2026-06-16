@@ -59,6 +59,12 @@ public class Camion {
 	public void setCapacidadMaxima(float capacidadMaxima) {
 		this.capacidadMaxima = capacidadMaxima;
 	}
+
+	@Override
+	public String toString() {
+		return "Camion [id=" + id + ", patente=" + patente + ", refrigerado=" + refrigerado + ", capacidadMaxima="
+				+ capacidadMaxima + "]";
+	}
 	
 	
 }
