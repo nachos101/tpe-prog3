@@ -1,4 +1,4 @@
-package tp_prog3;
+package tpe_prog3;
 import java.io.IOException;
 import java.util.*;
 
@@ -12,9 +12,11 @@ public class Main {
 		
 		
 		try {
-			List<Paquete> listExample = Lector.getPaquetes("Paquete.txt");
+			List<Paquete> listPaquete = Lector.getPaquetes("Paquete.txt");
+			List<Camion> listCamion = Lector.getCamiones("Camiones.txt");
 			System.out.println("\n--- Paquetes leídos ---");
-            listExample.forEach(System.out::println);
+            listPaquete.forEach(System.out::println);
+            listCamion.forEach(System.out::println);
 		}
 		catch(IOException e) {
 			System.err.println("Error");

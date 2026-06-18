@@ -1,4 +1,4 @@
-package tp_prog3;
+package tpe_prog3;
 
 import java.util.List;
 import java.util.Map;

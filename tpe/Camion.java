@@ -1,4 +1,4 @@
-package tp_prog3;
+package tpe_prog3;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,10 @@ public class Camion {
 		else {
 			System.out.println("No hay espacio para este paquete");
 		}
+	}
+	
+	public void eliminarPaquete(Paquete p) {
+		this.listaPaquetes.remove(p);
 	}
 	
 	public float pesoActual() {
@@ -66,5 +70,12 @@ public class Camion {
 				+ capacidadMaxima + "]";
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (!(obj instanceof Paquete)) return false;
+	    Paquete otro = (Paquete) obj;
+	    return this.id == otro.getId();
+	}
+
 }
