@@ -1,4 +1,3 @@
-package tpe_prog3;
 
 import java.util.ArrayList;
 import java.util.List;

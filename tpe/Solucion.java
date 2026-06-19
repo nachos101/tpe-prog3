@@ -1,4 +1,3 @@
-package tpe_prog3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +21,14 @@ public class Solucion {
         this.noAsignados = new ArrayList<>();
         this.asignaciones = new HashMap<>();
         this.estadosGenerados = 0;
+    }
+
+    public void agregarPaqueteSolucion (int idCamion, Paquete p){
+        if (!asignaciones.containsKey(idCamion)){
+            this.asignaciones.put(idCamion, new ArrayList<>());   
+        }
+        this.asignaciones.get(idCamion).add(p);
+
     }
 
     public void agregarNoAsignado(Paquete p) {
@@ -51,8 +58,7 @@ public class Solucion {
         return pesoNoAsignado;
     }
 
-	@Override
-    public String toString() {
+    public String toStringBacktracking() {
 		StringBuilder sb = new StringBuilder();
 	    sb.append("\n=== SOLUCION BACKTRACKING ===\n");
 	    for (var entry : asignaciones.entrySet()) {
@@ -72,6 +78,29 @@ public class Solucion {
         }
         sb.append(noAsignados + "\n");
 	    sb.append("Estados generados: " + estadosGenerados + "\n");
+	    return sb.toString();
+    }
+
+        public String toStringGreedy() {
+		StringBuilder sb = new StringBuilder();
+	    sb.append("\n===== SOLUCION GREEDY =====\n");
+	    for (var entry : asignaciones.entrySet()) {
+	        sb.append("Camion ")
+            .append(entry.getKey())
+            .append(" = ");
+            if (entry.getValue().isEmpty()){
+                sb.append("|camion vacio.|");
+            }
+            sb.append(entry.getValue())
+            .append("\n");
+	    }
+	    sb.append("Peso no asignado: " + pesoNoAsignado + " kg\n");
+	    sb.append("Paquetes sin asignar: ");
+        if (noAsignados.isEmpty()){
+            sb.append("Ninguno, se asignaron todos los paquetes." + "\n");
+        }
+        sb.append(noAsignados + "\n");
+	    sb.append("Cantidad de candidatos considerados: " + estadosGenerados + "\n");
 	    return sb.toString();
     }
 }

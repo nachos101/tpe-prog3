@@ -1,4 +1,4 @@
-package tpe_prog3;
+
 
 public class Paquete {
 	private int id;
