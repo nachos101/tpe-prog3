@@ -19,19 +19,22 @@ public class Lector {
                 List<String> campos = parsearLineaCSV(linea);
                 // Esperamos al menos 4 campos: id, patente, capacidad, modelo
                 if (campos.size() < 4) continue;
-                int id = Integer.parseInt(campos.get(0).trim());
+                int idCamion = Integer.parseInt(campos.get(0).trim());
                 String patente = campos.get(1).trim();
-                boolean refrigerado = Boolean.parseBoolean(campos.get(2).trim());
+                boolean refrigerado = false;
+                if (Integer.parseInt(campos.get(2).trim()) == 1){
+                    refrigerado = true;
+                }
                 float capacidad = Float.parseFloat(campos.get(3).trim());
-                camiones.add(new Camion(id, patente, refrigerado,capacidad));
+                camiones.add(new Camion(idCamion, patente, refrigerado ,capacidad));
             }
         
         return camiones;
         }	
 	}
 	
-	public static List<Paquete> getPaquetes(String ruta) throws IOException{
-		List<Paquete> paquetes = new ArrayList<>();
+	public static Map<String,Paquete> getPaquetes(String ruta) throws IOException{
+		Map<String,Paquete> paquetes = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String linea;
             boolean primera = true;
@@ -42,13 +45,16 @@ public class Lector {
                     continue;
                 }
                 List<String> campos = parsearLineaCSV(linea);
-                if (campos.size() < 4) continue;
-                int id = Integer.parseInt(campos.get(0).trim());
+                if (campos.size() < 5) continue;
+                int idPaq = Integer.parseInt(campos.get(0).trim());
                 String codigo = campos.get(1).trim();
                 float pesoPaquete = Float.parseFloat(campos.get(2).trim());
-                boolean contieneAlimentos = Boolean.parseBoolean(campos.get(3).trim());
-                int nivelUrgencia = Integer.parseInt(campos.get(3).trim());
-                paquetes.add(new Paquete(id, codigo, pesoPaquete, contieneAlimentos, nivelUrgencia));
+                boolean contieneAlimentos = false;
+                if (Integer.parseInt(campos.get(3).trim()) == 1){
+                    contieneAlimentos = true;
+                }
+                int nivelUrgencia = Integer.parseInt(campos.get(4).trim());
+                paquetes.put(codigo, new Paquete(idPaq, codigo, pesoPaquete, contieneAlimentos, nivelUrgencia));
             }
         }
         return paquetes;

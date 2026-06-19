@@ -4,19 +4,21 @@ import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Camion camioneta = new Camion(1,"FFD",true,80);
-		Paquete p = new Paquete(1,"SAD",60,true,5);
-		System.out.println(camioneta);
-		System.out.println(p);
-		
-		
+	public static void main(String[] args) {		
 		try {
-			List<Paquete> listPaquete = Lector.getPaquetes("Paquete.txt");
-			List<Camion> listCamion = Lector.getCamiones("Camiones.txt");
+			Map<String,Paquete> paquetes = Lector.getPaquetes("Paquete.txt");
+			List<Camion> camiones = Lector.getCamiones("Camion.txt");
 			System.out.println("\n--- Paquetes leídos ---");
-            listPaquete.forEach(System.out::println);
-            listCamion.forEach(System.out::println);
+            paquetes.values().forEach(System.out::println);
+            camiones.forEach(System.out::println);
+			Servicios s1 = new Servicios("Camion.txt", "Paquete.txt");
+			System.out.println("PAQUETE BUSCADO: " + s1.servicio1("P001"));
+			System.out.println("ALIMENTOS?:\n" + s1.servicio2(false));
+			System.out.println("RANGO URGENCIA:\n " + s1.servicio3(1, 2));
+			//Se llama a la solucion backtracking
+			Backtracking bt = new Backtracking();
+			Solucion s = bt.backtracking(paquetes, camiones);
+			System.out.println(s.toString());
 		}
 		catch(IOException e) {
 			System.err.println("Error");
