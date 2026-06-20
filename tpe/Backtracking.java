@@ -28,6 +28,10 @@ public class Backtracking {
 	-Estados solucion:
 		Se llega a un estado solucion cuando todos los camiones hayan alcanzado su capacidad maxima, o se hayan agotado
 		los paquetes, lo que suceda primero.
+
+	La complejidad temporal de esta estrategia es de O((m+1)^n), siendo n la cantidad de paquetes y m la cantidad de camiones.
+	Si hay m camiones, cada paquete puede generar hasta m+1 ramas, y se eleva a la n porque para cada uno
+	de los paquetes se elige entre m+1 opciones.
     */
 
 	/* Se pasan los datos de un Map a una List para poder trabajar con indices de forma temporal.

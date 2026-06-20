@@ -29,6 +29,10 @@ public class Greedy {
         Greedy toma las decisiones que considera optimas para cada paso, no de manera general.
         Por esto la solucion factible puede no ser la optima y que queden paquetes sin asignar por mas
         que distribuyendolos de otra manera si pudieran asignarse.
+
+    La complejidad temporal de esta estrategia es de O(n * m), siendo n la cantidad de paquetes y
+    m la cantidad de camiones. La asignacion se ejecuta n veces y en el peor de los casos recorre
+    todos los camiones m veces.
     */
 
     public Solucion Greedy(Map<String, Paquete> paquetes, List<Camion> camiones) {
