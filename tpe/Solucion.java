@@ -49,6 +49,7 @@ public class Solucion {
         this.pesoNoAsignado = otra.pesoNoAsignado;
         this.noAsignados = new ArrayList<>(otra.noAsignados);
         this.estadosGenerados = otra.estadosGenerados;
+        this.asignaciones.clear();
         for (Camion c : camiones) {
             asignaciones.put(c.getId(), new ArrayList<>(c.getListaPaquete()));
         }

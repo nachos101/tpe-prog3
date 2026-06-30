@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Greedy {
 
-    public List<Paquete> listaPaquetesOrdenados (Map<String, Paquete> paquetes){
-        List<Paquete> lista = new ArrayList<>(paquetes.values());
+    public List<Paquete> listaPaquetesOrdenados (List<Paquete> paquetes){
+        List<Paquete> lista = new ArrayList<>(paquetes);
         lista.sort(Comparator.comparingDouble(Paquete::getPesoPaquete).reversed());
         return lista;
     }
@@ -35,12 +35,12 @@ public class Greedy {
     todos los camiones m veces.
     */
 
-    public Solucion Greedy(Map<String, Paquete> paquetes, List<Camion> camiones) {
-        List<Paquete> candidatos = listaPaquetesOrdenados(paquetes);
+    public Solucion Greedy(List<Paquete> paquetes, List<Camion> camiones) {
+        listaPaquetesOrdenados(paquetes);
         camiones.sort(Comparator.comparingDouble(Camion::getCapacidadMaxima).reversed());
         Solucion s = new Solucion();
 
-        for (Paquete p : candidatos) {
+        for (Paquete p : paquetes) {
             s.incrementarEstados();
             boolean asignado = false;
             int i = 0;
@@ -58,6 +58,10 @@ public class Greedy {
             if (!asignado){
                 s.agregarNoAsignado(p);
             }
+        }
+
+        for (Camion c : camiones){
+            c.vaciar();
         }
 
         return s;

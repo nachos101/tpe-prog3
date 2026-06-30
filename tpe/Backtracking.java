@@ -36,8 +36,7 @@ public class Backtracking {
 
 	/* Se pasan los datos de un Map a una List para poder trabajar con indices de forma temporal.
 	Esto tiene un costo unico de O(n) siendo n los paquetes almacenados en el mapa. */
-	public Solucion backtracking(Map<String,Paquete> paquetes, List<Camion> camiones) {
-   		List<Paquete> listaPaquetes = new ArrayList<>(paquetes.values());
+	public Solucion backtracking(List<Paquete> listaPaquetes, List<Camion> camiones) {
 		//arranca el peso no asignado en un numero muy alto.
 		Solucion mejorSolucion = new Solucion(Float.MAX_VALUE);
 		//arranca el peso no asignado en cero.
@@ -52,6 +51,9 @@ public class Backtracking {
 			int indice, Solucion actual, Solucion mejor) {
 			//Caso base. El peso de los paquetes no asignados de la solucion actual es mejor que la ultima mejor solucion.
 			actual.incrementarEstados();
+			if (actual.getPesoNoAsignado() >= mejor.getPesoNoAsignado()){
+				return;
+			}
 			if (indice == paquetes.size()) {
 				if (actual.getPesoNoAsignado() < mejor.getPesoNoAsignado()) {
 					mejor.copiarDe(actual, camiones);

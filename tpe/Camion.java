@@ -26,6 +26,10 @@ public class Camion {
 		this.listaPaquetes.remove(p);
 	}
 
+	public void vaciar() {
+    	this.listaPaquetes.clear();
+	}
+
 	public List<Paquete> getListaPaquete(){
 		return new ArrayList<>(listaPaquetes);
 	}
