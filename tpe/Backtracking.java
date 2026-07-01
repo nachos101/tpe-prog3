@@ -51,9 +51,6 @@ public class Backtracking {
 			int indice, Solucion actual, Solucion mejor) {
 			//Caso base. El peso de los paquetes no asignados de la solucion actual es mejor que la ultima mejor solucion.
 			actual.incrementarEstados();
-			if (actual.getPesoNoAsignado() >= mejor.getPesoNoAsignado()){
-				return;
-			}
 			if (indice == paquetes.size()) {
 				if (actual.getPesoNoAsignado() < mejor.getPesoNoAsignado()) {
 					mejor.copiarDe(actual, camiones);
@@ -65,17 +62,22 @@ public class Backtracking {
 
 			//Se intenta asignar el paquete a un camion.
 			for (Camion c : camiones) {
-				if (c.pesoActual() + p.getPesoPaquete() <= c.getCapacidadMaxima() &&
-					(!p.isContieneAlimentos() || c.isRefrigerado())) {
+				if (c.puedeCargarse(p)) {
 					c.agregarPaquetes(p);
-					btRecursivo(paquetes, camiones, indice + 1, actual, mejor);
+					//se pregunta por poda, para no entrar en una rama invalida.
+					if (actual.getPesoNoAsignado() < mejor.getPesoNoAsignado()){
+						btRecursivo(paquetes, camiones, indice + 1, actual, mejor);
+					}				
 					c.eliminarPaquete(p);
 				}
 			}
-
 			//En caso de no ser posible, se deja sin asignar.
 			actual.agregarNoAsignado(p);
-			btRecursivo(paquetes, camiones, indice + 1, actual, mejor);
+			//se pregunta por poda, para no entrar en una rama invalida.
+			if (actual.getPesoNoAsignado() < mejor.getPesoNoAsignado()){
+				btRecursivo(paquetes, camiones, indice + 1, actual, mejor);	
+			}
 			actual.quitarNoAsignado(p);
+
 	}
 }

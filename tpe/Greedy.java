@@ -41,12 +41,11 @@ public class Greedy {
         Solucion s = new Solucion();
 
         for (Paquete p : paquetes) {
-            s.incrementarEstados();
             boolean asignado = false;
             int i = 0;
             while (i < camiones.size() && !asignado){
-                if ((camiones.get(i).pesoActual() + p.getPesoPaquete() <= camiones.get(i).getCapacidadMaxima())&&
-                    (!p.isContieneAlimentos() || camiones.get(i).isRefrigerado())){
+                s.incrementarEstados();
+                if (camiones.get(i).puedeCargarse(p)){
                     s.agregarPaqueteSolucion(camiones.get(i).getId(), p);
                     //agrego el paquete al camion para que se actualice el peso 
                     camiones.get(i).agregarPaquetes(p);

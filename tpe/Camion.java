@@ -30,6 +30,11 @@ public class Camion {
     	this.listaPaquetes.clear();
 	}
 
+	public boolean puedeCargarse(Paquete p){
+		return (this.pesoActual() + p.getPesoPaquete() <= this.getCapacidadMaxima() && 
+				(!p.isContieneAlimentos() || this.isRefrigerado()));
+	}
+
 	public List<Paquete> getListaPaquete(){
 		return new ArrayList<>(listaPaquetes);
 	}
